@@ -1,3 +1,9 @@
+# coding: utf-8
+
+# created by Hang Wu on 2018.10.07
+# feedback: h.wu@tum.de
+
+
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
@@ -14,8 +20,6 @@ def object_dict(impath):
     img = cv2.imread(impath, -1)
 
     rows, cols, channels = img.shape
-
-    # emptyImage = np.zeros([rows,cols,3], np.uint8)
 
     # Initialization for the position
     xmin = cols
@@ -35,13 +39,6 @@ def object_dict(impath):
                     ymax = i
                 if xmax < j:
                     xmax = j
-
-    # Generate mask
-    # cv2.imshow('mask',emptyImage)
-    # cv2.waitKey(0)
-    # cv2.destroyAllWindows()
-    # mask_name = bnd_dict['filename'] = impath.split(os.path.sep)[-1][:-4]
-    # cv2.imwrite('masks/mask_{}.png'.format(mask_name), emptyImage)
 
     # Bounding box information for .xml
     bnd_dict['folder'] = impath.split(os.path.sep)[-2]

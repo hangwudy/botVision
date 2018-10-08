@@ -1,3 +1,9 @@
+# coding: utf-8
+
+# created by Hang Wu on 2018.10.07
+# feedback: h.wu@tum.de
+
+
 import cv2
 import numpy as np
 from numpy import random
@@ -76,18 +82,23 @@ def overlap(background, foreground, bnd_pos):
     cv2.imwrite('masks/{}.png'.format(save_name), object_mask)
 
     # Display
-    # cv2.imshow('{}.jpg'.format(save_name), output_image)
-    # cv2.imshow('mask', object_mask)
-    # cv2.waitKey(1000)
-    # cv2.destroyAllWindows()
+    cv2.imshow('{}.jpg'.format(save_name), output_image)
+    cv2.imshow('mask', object_mask)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
     return bnd_pos
 
 
 if __name__ == '__main__':
     
     fg_list = load_image.loadim('images')
+    print(fg_list)
+    bg_list = load_image.loadim('background','jpg','Fabrik')
+    print(bg_list)
     for fg in fg_list:
         bnd_info = generate_dict.object_dict(fg)
         fg = cv2.imread(fg, -1)
-        bg = cv2.imread('background/Fabrik.jpg', -1)
+        bg_path = random.choice(bg_list)
+        print(bg_path)
+        bg = cv2.imread(bg_path, -1)
         overlap(bg, fg, bnd_info)

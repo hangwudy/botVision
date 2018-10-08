@@ -1,9 +1,13 @@
-# coding:utf-8
+# coding: utf-8
+
+# created by Hang Wu on 2018.10.07
+# feedback: h.wu@tum.de
 
 from lxml.etree import Element, SubElement, tostring
 import pprint
 from xml.dom.minidom import parseString
 import cv2
+from numpy import random
 
 # Eigen
 import image_overlay
@@ -71,10 +75,12 @@ def xml_generator(bndbox):
 
 if __name__ == '__main__':
     fg_list = load_image.loadim('images')
+    bg_list = load_image.loadim('background','jpg','Fabrik')
     for fg in fg_list:
         bnd_info = generate_dict.object_dict(fg)
         fg = cv2.imread(fg, -1)
-        bg = cv2.imread('background/Fabrik.jpg', -1)
+        bg_path = random.choice(bg_list)
+        bg = cv2.imread(bg_path, -1)
         object_bndbox = image_overlay.overlap(bg, fg, bnd_info)
         xml_generator(object_bndbox)
         print(object_bndbox)
