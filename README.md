@@ -1,4 +1,4 @@
 # roboVisi
 Robot Vision
 
-This is my first project in GitHub for my master thesis. Thanks for watching!
+This is my project for Robot Vision. Thanks for your interest.
