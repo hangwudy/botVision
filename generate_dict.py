@@ -62,5 +62,5 @@ if __name__ == '__main__':
     # test
     image_path_list = load_image.loadim('images')
     for image_path in image_path_list:
-        bp = target_position(image_path)
+        bp = object_dict(image_path)
         print(bp)
