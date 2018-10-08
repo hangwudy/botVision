@@ -15,6 +15,7 @@ def xml_to_csv(path):
         tree = ET.parse(xml_file)
         root = tree.getroot()
         for member in root.findall('object'):
+
             value = (root.find('filename').text,
                      int(root.find('size')[0].text),
                      int(root.find('size')[1].text),
@@ -36,5 +37,5 @@ def main(object_name = 'car_door'):
     xml_df.to_csv('csv/{}_labels.csv'.format(object_name), index=None)
     print('Successfully converted xml to csv.')
 
-
-main()
+if __name__ == '__main__':
+    main()
