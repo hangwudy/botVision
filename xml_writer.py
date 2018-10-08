@@ -52,6 +52,9 @@ def xml_generator(bndbox):
     ### Pose
     node_pose = SubElement(node_object, 'pose')
     node_pose.text = 'Unspecified'
+    ### Truncated
+    node_truncated = SubElement(node_object, 'truncated')
+    node_truncated.text = '0'
     ### Difficult
     node_difficult = SubElement(node_object, 'difficult')
     node_difficult.text = '0'

@@ -14,12 +14,13 @@
   <object>
     <name>car_door</name>
     <pose>Unspecified</pose>
+    <truncated>0</truncated>
     <difficult>0</difficult>
     <bndbox>
-      <xmin>702</xmin>
-      <ymin>559</ymin>
-      <xmax>1124</xmax>
-      <ymax>962</ymax>
+      <xmin>11</xmin>
+      <ymin>626</ymin>
+      <xmax>433</xmax>
+      <ymax>1029</ymax>
     </bndbox>
   </object>
 </annotation>
