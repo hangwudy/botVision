@@ -1,1 +1,0 @@
-print("This is a file to test Git in PyCharm!")
