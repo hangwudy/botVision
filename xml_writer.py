@@ -77,8 +77,8 @@ def xml_generator(bndbox):
     fp.close()
 
 if __name__ == '__main__':
-    fg_list = load_image.loadim('images')
-    bg_list = load_image.loadim('background','jpg','Fabrik')
+    fg_list = load_image.loadim('car_door')
+    bg_list = load_image.loadim('background','jpg','background')
     for fg in fg_list:
         bnd_info = generate_dict.object_dict(fg)
         fg = cv2.imread(fg, -1)

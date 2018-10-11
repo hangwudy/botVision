@@ -82,10 +82,10 @@ def overlap(background, foreground, bnd_pos):
     cv2.imwrite('masks/{}.png'.format(save_name), object_mask)
 
     # Display
-    cv2.imshow('{}.jpg'.format(save_name), output_image)
-    cv2.imshow('mask', object_mask)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    # cv2.imshow('{}.jpg'.format(save_name), output_image)
+    # cv2.imshow('mask', object_mask)
+    # cv2.waitKey(0)
+    # cv2.destroyAllWindows()
     return bnd_pos
 
 

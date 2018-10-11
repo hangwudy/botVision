@@ -17,6 +17,6 @@ def loadim(image_path = 'images', ext = 'png', key_word = 'car_door'):
 
 
 if __name__ == '__main__':
-    impath = 'images'
+    impath = 'car_door'
     IMAGE_LIST = loadim(impath)
     print(IMAGE_LIST)
