@@ -18,6 +18,7 @@ def object_dict(impath):
                 'xmin': 0, 'ymin': 0, 'xmax': 0, 'ymax': 0}
     # read the image
     img = cv2.imread(impath, -1)
+    img = cv2.resize(img, (0,0), fx = 0.4, fy = 0.4, interpolation = cv2.INTER_CUBIC)
 
     rows, cols, channels = img.shape
 
@@ -57,7 +58,7 @@ def object_dict(impath):
 
 if __name__ == '__main__':
     # test
-    image_path_list = load_image.loadim('images')
+    image_path_list = load_image.loadim('../data/car_door')
     for image_path in image_path_list:
         bp = object_dict(image_path)
         print(bp)

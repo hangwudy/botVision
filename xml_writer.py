@@ -72,16 +72,21 @@ def xml_generator(bndbox):
     # format display
     xml = tostring(node_root, pretty_print=True)
     xml_name = bndbox['filename'][:-4]
-    fp = open('xmls/{}.xml'.format(xml_name), 'w')
+    fp = open('../data/annotations/xmls/{}.xml'.format(xml_name), 'w')
     fp.write(xml.decode())
     fp.close()
 
 if __name__ == '__main__':
-    fg_list = load_image.loadim('images')
-    bg_list = load_image.loadim('background','jpg','Fabrik')
+    fg_list = load_image.loadim('../data/car_door')
+    
+    bg_list = load_image.loadim('../data/background','jpg','BG')
+
     for fg in fg_list:
+        # IMPORTANT: if you want to resize images, don't forget resize in generate_dict
         bnd_info = generate_dict.object_dict(fg)
         fg = cv2.imread(fg, -1)
+        # resize the car door images
+        fg = cv2.resize(fg, (0,0), fx = 0.4, fy = 0.4, interpolation = cv2.INTER_CUBIC)
         bg_path = random.choice(bg_list)
         bg = cv2.imread(bg_path, -1)
         object_bndbox = image_overlay.overlap(bg, fg, bnd_info)

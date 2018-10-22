@@ -18,8 +18,8 @@ def overlap(background, foreground, bnd_pos):
     # print(foreground.shape)
     # print(background.shape)
 
-    rows, cols, channels = foreground.shape
-    rows_b, cols_b, channels_b = background.shape
+    rows, cols = foreground.shape[:2]
+    rows_b, cols_b = background.shape[:2]
 
     # Mask initialization
     object_mask = np.zeros([rows_b, cols_b, 3], np.uint8)
@@ -56,7 +56,7 @@ def overlap(background, foreground, bnd_pos):
     save_name = bnd_pos['filename'][:-4]
     # Path
     current_path = os.path.abspath('.')
-    save_path = os.path.join(current_path, 'output{}{}.jpg'.format(os.path.sep, save_name))
+    save_path = os.path.join(current_path, '../data/images{}{}.jpg'.format(os.path.sep, save_name))
     print(save_path)
     # Update xml data
     ## file info
@@ -78,14 +78,14 @@ def overlap(background, foreground, bnd_pos):
 
 
     # Save images
-    cv2.imwrite('output/{}.jpg'.format(save_name), output_image)
-    cv2.imwrite('masks/{}.png'.format(save_name), object_mask)
+    cv2.imwrite('../data/images/{}.jpg'.format(save_name), output_image)
+    cv2.imwrite('../data/annotations/masks/{}.png'.format(save_name), object_mask)
 
     # Display
-    cv2.imshow('{}.jpg'.format(save_name), output_image)
-    cv2.imshow('mask', object_mask)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    # cv2.imshow('{}.jpg'.format(save_name), output_image)
+    # cv2.imshow('mask', object_mask)
+    # cv2.waitKey(0)
+    # cv2.destroyAllWindows()
     return bnd_pos
 
 
