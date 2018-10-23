@@ -39,24 +39,42 @@ def overlap(background, foreground, bnd_pos):
     print('movement y:',move_y)
     
     for i in range(rows):
+
+        ###### for solid mask 1. part >>>>
+        col_min = cols
+        col_max = 0
+        ###### for solid mask 1. part <<<<
+
         for j in range(cols):
             if foreground[i,j][3] != 0:
                 # Overlap images
                 try:
                     background[i + move_y, j + move_x] = foreground[i,j]
                 except:
-                    print(i + move_y)
+                    break
+                # Mask generating (for nomal mask with hols)
+                # object_mask[i + move_y, j + move_x] = [0, 0, 255]
 
-                # Mask generating
-                object_mask[i + move_y, j + move_x] = [0, 0, 255]
-    
+                ###### for solid mask 2. part >>>>
+                if col_min > j:
+                    col_min = j
+                if col_max < j:
+                    col_max = j
+        for col in range(col_min, col_max + 1):
+            try:
+                object_mask[i + move_y, col + move_x] = [0, 0, 255]
+            except:
+                break
+                ###### for solid mask 2. part <<<<
+
     output_image = cv2.cvtColor(background, cv2.COLOR_BGRA2BGR)
 
 
     save_name = bnd_pos['filename'][:-4]
     # Path
     current_path = os.path.abspath('.')
-    save_path = os.path.join(current_path, '../data/images{}{}.jpg'.format(os.path.sep, save_name))
+    save_path = os.path.join(os.path.abspath(os.path.dirname(current_path) + 
+                    os.path.sep + "data/images"), '{}.jpg'.format(save_name))
     print(save_path)
     # Update xml data
     ## file info
