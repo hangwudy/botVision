@@ -1,0 +1,26 @@
+<annotation>
+	<folder>JSON_generator</folder>
+	<filename>car_door_2.png</filename>
+	<path>/home/hangwu/CyMePro/botVision/JSON_generator/car_door_2.png</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>1500</width>
+		<height>1125</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>car_door</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>765</xmin>
+			<ymin>335</ymin>
+			<xmax>1194</xmax>
+			<ymax>747</ymax>
+		</bndbox>
+	</object>
+</annotation>
