@@ -3,12 +3,12 @@ from skimage import measure
 from shapely.geometry import Polygon, MultiPolygon
 
 
-def create_image_annotation(file_name, width, height, image_id):
+def create_image_annotation(file_name, height, width, image_id):
     images = {
-        'license': 0,
+        'license': 1,
         'file_name': file_name,
-        'width': width,
         'height': height,
+        'width': width,
         'id': image_id
     }
     return images
@@ -18,7 +18,7 @@ def create_image_annotation(file_name, width, height, image_id):
 
 
 
-def create_sub_mask_annotation(sub_mask, image_id, category_id, annotation_id, is_crowd):
+def create_sub_mask_annotation(sub_mask, is_crowd, image_id, category_id, annotation_id):
     # Find contours (boundary lines) around each sub-mask
     # Note: there could be multiple contours if the object
     # is partially occluded. (E.g. an elephant behind a tree)
@@ -37,7 +37,7 @@ def create_sub_mask_annotation(sub_mask, image_id, category_id, annotation_id, i
         # Make a polygon and simplify it
         poly = Polygon(contour)
         
-        poly = poly.simplify(1.0, preserve_topology=False)
+        poly = poly.simplify(0.4, preserve_topology=False)
 
         # print(poly)
         polygons.append(poly)
@@ -54,12 +54,12 @@ def create_sub_mask_annotation(sub_mask, image_id, category_id, annotation_id, i
 
     annotation = {
         'segmentation': segmentations,
+        'area': area,
         'iscrowd': is_crowd,
         'image_id': image_id,
-        'category_id': category_id,
-        'id': annotation_id,
         'bbox': bbox,
-        'area': area
+        'category_id': category_id,
+        'id': annotation_id
     }
 
     return annotation

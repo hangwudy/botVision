@@ -34,7 +34,7 @@ car_door_annotation = {
     'licenses': [
         {
         "url": "hangwudy.github.io",
-        "id": 0,
+        "id": 1,
         "name": 'MIT'
         }
     ],
@@ -64,8 +64,8 @@ def images_annotations_info(maskpath):
     images = []
 
     mask_images_path = loadim(maskpath)
-    for id_number, mask_image_path in enumerate(mask_images_path):
-        file_name = mask_image_path.split(os.path.sep)[-1]
+    for id_number, mask_image_path in enumerate(mask_images_path, 1):
+        file_name = mask_image_path.split(os.path.sep)[-1][:-4]+'.jpg'
         mask_image = Image.open(mask_image_path)
         sub_masks = create_sub_masks(mask_image)
         for color, sub_mask in sub_masks.items():
@@ -76,14 +76,16 @@ def images_annotations_info(maskpath):
             # image shape
             width, height = mask_image.size
             # 'images' info 
-            image = create_image_annotation(file_name, width, height, image_id)
+            image = create_image_annotation(file_name, height, width, image_id)
             images.append(image)
             # 'annotations' info
-            annotation = create_sub_mask_annotation(sub_mask, image_id, category_id, annotation_id, is_crowd)
+            annotation = create_sub_mask_annotation(sub_mask, is_crowd, image_id, category_id, annotation_id)
             annotations.append(annotation)
     return images, annotations
 
-car_door_annotation['images'], car_door_annotation['annotations'] = images_annotations_info('masks')
-print(json.dumps(car_door_annotation))
-with open('masks/car_door.json','w') as outfile:
-    json.dump(car_door_annotation, outfile)
+if __name__ == '__main__':
+    mask_path = '/home/hangwu/CyMePro/data/annotations/train_mask'
+    car_door_annotation['images'], car_door_annotation['annotations'] = images_annotations_info(mask_path)
+    print(json.dumps(car_door_annotation))
+    with open('output/car_door_train.json','w') as outfile:
+        json.dump(car_door_annotation, outfile)
