@@ -81,11 +81,13 @@ def images_annotations_info(maskpath):
             # 'annotations' info
             annotation = create_sub_mask_annotation(sub_mask, is_crowd, image_id, category_id, annotation_id)
             annotations.append(annotation)
+            print('{}% finished.'.format((id_number / len(mask_images_path) * 100)))
     return images, annotations
 
 if __name__ == '__main__':
-    mask_path = '/home/hangwu/CyMePro/data/annotations/train_mask'
-    car_door_annotation['images'], car_door_annotation['annotations'] = images_annotations_info(mask_path)
-    print(json.dumps(car_door_annotation))
-    with open('output/car_door_train.json','w') as outfile:
-        json.dump(car_door_annotation, outfile)
+    for keyword in ['train', 'val']:
+        mask_path = '/home/hangwu/CyMePro/data/annotations/{}_mask'.format(keyword)
+        car_door_annotation['images'], car_door_annotation['annotations'] = images_annotations_info(mask_path)
+        print(json.dumps(car_door_annotation))
+        with open('output/car_door_{}.json'.format(keyword),'w') as outfile:
+            json.dump(car_door_annotation, outfile)
