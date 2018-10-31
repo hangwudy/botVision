@@ -81,7 +81,7 @@ def images_annotations_info(maskpath):
             # 'annotations' info
             annotation = create_sub_mask_annotation(sub_mask, is_crowd, image_id, category_id, annotation_id)
             annotations.append(annotation)
-            print('{}% finished.'.format((id_number / len(mask_images_path) * 100)))
+            print('{:.2f}% finished.'.format((id_number / len(mask_images_path) * 100)))
     return images, annotations
 
 if __name__ == '__main__':

@@ -83,10 +83,11 @@ if __name__ == '__main__':
 
     for fg in fg_list:
         # IMPORTANT: if you want to resize images, don't forget resize in generate_dict
-        bnd_info = generate_dict.object_dict(fg)
+        img_scale = 0.4
+        bnd_info = generate_dict.object_dict(fg, img_scale)
         fg = cv2.imread(fg, -1)
         # resize the car door images
-        fg = cv2.resize(fg, (0,0), fx = 0.4, fy = 0.4, interpolation = cv2.INTER_CUBIC)
+        fg = cv2.resize(fg, (0,0), fx = img_scale, fy = img_scale, interpolation = cv2.INTER_CUBIC)
         bg_path = random.choice(bg_list)
         bg = cv2.imread(bg_path, -1)
         object_bndbox = image_overlay.overlap(bg, fg, bnd_info)

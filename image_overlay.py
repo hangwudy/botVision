@@ -22,7 +22,10 @@ def overlap(background, foreground, bnd_pos):
     rows_b, cols_b = background.shape[:2]
 
     # Mask initialization
+    # solid mask
     object_mask = np.zeros([rows_b, cols_b, 3], np.uint8)
+    # mask with window
+    object_mask_with_window = np.zeros([rows_b, cols_b, 3], np.uint8)
 
     # Range of x and y
     low_x = bnd_pos['xmin']
@@ -52,8 +55,8 @@ def overlap(background, foreground, bnd_pos):
                     background[i + move_y, j + move_x] = foreground[i,j]
                 except:
                     break
-                # Mask generating (for nomal mask with hols)
-                # object_mask[i + move_y, j + move_x] = [0, 0, 255]
+                # Mask generating (for nomal mask with window)
+                object_mask_with_window[i + move_y, j + move_x] = [0, 0, 255]
 
                 ###### for solid mask 2. part >>>>
                 if col_min > j:
@@ -96,12 +99,20 @@ def overlap(background, foreground, bnd_pos):
 
 
     # Save images
-    cv2.imwrite('../data/images/{}.jpg'.format(save_name), output_image)
+    # Official
+    cv2.imwrite('../data/dataset/images/{}.jpg'.format(save_name), output_image)
     cv2.imwrite('../data/annotations/masks/{}.png'.format(save_name), object_mask)
-
+    cv2.imwrite('../data/annotations/masks_with_window/{}.png'.format(save_name), object_mask_with_window)
+    
+    # Test
+    # cv2.imwrite('images/{}.jpg'.format(save_name), output_image)
+    # cv2.imwrite('masks/{}.png'.format(save_name), object_mask)
+    # cv2.imwrite('masks_with_window/{}.png'.format(save_name), object_mask_with_window)
+    
     # Display
     # cv2.imshow('{}.jpg'.format(save_name), output_image)
     # cv2.imshow('mask', object_mask)
+    # cv2.imshow('mask with window', object_mask_with_window)
     # cv2.waitKey(0)
     # cv2.destroyAllWindows()
     return bnd_pos
@@ -114,7 +125,7 @@ if __name__ == '__main__':
     bg_list = load_image.loadim('background','jpg','Fabrik')
     print(bg_list)
     for fg in fg_list:
-        bnd_info = generate_dict.object_dict(fg)
+        bnd_info = generate_dict.object_dict(fg, 1)
         fg = cv2.imread(fg, -1)
         bg_path = random.choice(bg_list)
         print(bg_path)

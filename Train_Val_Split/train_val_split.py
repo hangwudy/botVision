@@ -19,7 +19,7 @@ def loadim(image_path = 'images', ext = 'jpg', key_word = 'car_door'):
 
 # Path
 # Images
-Main_Dataset_Path='/home/hangwu/CyMePro/data/images'
+Main_Dataset_Path='/home/hangwu/CyMePro/data/dataset/images'
 Train_Dataset_Path='/home/hangwu/CyMePro/data/dataset/train_data'
 Val_Dataset_Path='/home/hangwu/CyMePro/data/dataset/val_data'
 Test_Dataset_Path='/home/hangwu/CyMePro/data/dataset/test_data'
@@ -43,6 +43,19 @@ mask_path_dict = {
     'Train': Train_Mask_Path,
     'Val': Val_Mask_Path,
     'Test': Test_Mask_Path
+}
+
+# Masks
+Main_Mask_ww_Path='/home/hangwu/CyMePro/data/annotations/masks_with_window'
+Train_Mask_ww_Path='/home/hangwu/CyMePro/data/annotations/train_mask_with_window'
+Val_Mask_ww_Path='/home/hangwu/CyMePro/data/annotations/val_mask_with_window'
+Test_Mask_ww_Path='/home/hangwu/CyMePro/data/annotations/test_mask_with_window'
+
+mask_ww_path_dict = {
+    'Main': Main_Mask_ww_Path,
+    'Train': Train_Mask_ww_Path,
+    'Val': Val_Mask_ww_Path,
+    'Test': Test_Mask_ww_Path
 }
 
 # XMLs
@@ -122,6 +135,12 @@ for key in TrainValTestIds.keys():
         mask_dest_path = mask_path_dict[key]
         mask_dest_file = os.path.join(mask_dest_path, file_name_without_ext+'.png')
         shutil.copy2(mask_origin_file, mask_dest_file)
+        # masks with window
+        mask_ww_origin_path = mask_ww_path_dict['Main']
+        mask_ww_origin_file = os.path.join(mask_ww_origin_path, file_name_without_ext+'.png')
+        mask_ww_dest_path = mask_ww_path_dict[key]
+        mask_ww_dest_file = os.path.join(mask_ww_dest_path, file_name_without_ext+'.png')
+        shutil.copy2(mask_ww_origin_file, mask_ww_dest_file)
         # XMLs
         xml_origin_path = xml_path_dict['Main']
         xml_origin_file = os.path.join(xml_origin_path, file_name_without_ext+'.xml')
