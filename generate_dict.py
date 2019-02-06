@@ -58,7 +58,7 @@ def object_dict(impath, scale = 0.4):
 
 if __name__ == '__main__':
     # test
-    image_path_list = load_image.loadim('../data/car_door')
+    image_path_list = load_image.loadim('/home/hangwu/Workspace/Car_Door')
     for image_path in image_path_list:
         bp = object_dict(image_path)
         print(bp)
