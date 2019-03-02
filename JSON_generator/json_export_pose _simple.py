@@ -108,14 +108,14 @@ def read_pose_json(json_path):
 def main(dataset_path, save_dir):
     car_door_pose = anno_export(dataset_path)
     print("start to write file.")
-    with open('{}/car_door_attitude_half.json'.format(save_dir), 'w') as outfile:
+    with open('{}/car_door_attitude_demo.json'.format(save_dir), 'w') as outfile:
         json.dump(car_door_pose, outfile)
     print("writing finished!")
 
 
 if __name__ == '__main__':
 
-    main('/media/hangwu/TOSHIBA_EXT/Dataset/renderings_square_half', '/media/hangwu/TOSHIBA_EXT/Dataset/annotations/pose')
+    main('/home/hangwu/Workspace/car_door_demo', '/home/hangwu/Workspace')
     # read_pose_json('car_door_pose.json')
 
 
