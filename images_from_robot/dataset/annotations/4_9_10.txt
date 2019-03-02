@@ -1,0 +1,23 @@
+
+Actual joint values: 
+ 
+Joint   1:      2.35
+Joint   2:    -27.45
+Joint   3:    -22.45
+Joint   4:      -.60
+Joint   5:    -93.53
+Joint   6:   -181.24
+EXTAXS: 1:      9.98
+EXTAXS: 1:      9.98
+EXTAXS: 1:      9.98
+
+TCP values in world frame: 
+ 
+X:    608.60
+Y:     25.99
+Z:    523.33
+W:    179.98
+P:    -25.99
+R:   -178.99
+
+Actual Transformation
