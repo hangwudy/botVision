@@ -7,14 +7,16 @@ import json
 
 def create_sub_masks(mask_image):
     width, height = mask_image.size
+    # print(mask_image.size)
 
     # Initialize a dictionary of sub-masks indexed by RGB colors
     sub_masks = {}
     for x in range(width):
         for y in range(height):
             # Get the RGB values of the pixel
-            print(mask_image.getpixel((x,y)))
+            # print(mask_image.getpixel((x,y)))
             pixel = mask_image.getpixel((x,y))[:3]
+            # print(pixel)
 
             # If the pixel is not black...
             if pixel != (0, 0, 0):
@@ -81,6 +83,17 @@ def create_sub_mask_annotation(sub_mask, image_id, category_id, annotation_id, i
 
 plant_book_mask_image = Image.open('plant_book_mask.png')
 bottle_book_mask_image = Image.open('bottle_book_mask.png')
+
+# Show images
+plant_book_mask_image.show()
+bottle_book_mask_image.show()
+# Test
+
+# print(plant_book_mask_image.getpixel((1,1)))
+# Convert!!!
+plant_book_mask_image = plant_book_mask_image.convert("RGB")
+bottle_book_mask_image = bottle_book_mask_image.convert("RGB")
+# print(plant_book_mask_image.getpixel((1,1)))
 
 mask_images = [plant_book_mask_image, bottle_book_mask_image]
 
