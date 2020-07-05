@@ -17,6 +17,6 @@ def loadim(image_path = 'images', ext = 'png', key_word = 'car_door'):
 
 
 if __name__ == '__main__':
-    impath = '../data/car_door'
-    IMAGE_LIST = loadim(impath)
+    impath = '/home/hangwu/Repositories/AIBox/AttitudeNet/xyz/render_x_-20_20_20_y_-20_20_20_z_-90_90_45/render'
+    IMAGE_LIST = loadim(impath, "png", "x")
     print(IMAGE_LIST,'\n')
